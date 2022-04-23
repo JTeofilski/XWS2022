@@ -1,11 +1,15 @@
 package com.example.profileservice.model.users;
 
 import com.example.profileservice.model.enums.GENDER;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
+@Data
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -55,4 +59,8 @@ public class User {
 
     @Column(name = "interests")
     private String interests;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 }
