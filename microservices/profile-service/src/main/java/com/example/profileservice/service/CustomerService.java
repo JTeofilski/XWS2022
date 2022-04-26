@@ -6,6 +6,7 @@ import com.example.profileservice.model.users.Role;
 import com.example.profileservice.repository.CustomerRepository;
 import com.example.profileservice.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,34 @@ public class CustomerService {
         Customer newCustomer =  customerRepository.save(customer);
 
         return newCustomer;
+    }
+
+    public Customer update(Customer customer){
+        Customer c = customerRepository.getCustomerByEmail(customer.getEmail());
+
+        if (c == null) {
+            throw new UsernameNotFoundException("User not found in database!");
+        }
+
+        //a. Dodavanje i izmena ličnih podataka: ime, email, broj telefona, pol,
+        //datum rođenja, username i biografija.
+        //b. Podešavanje radnog iskustva i obrazovanja.
+        //c. Podešavanje veština i interesovanja.
+
+        c.setName(customer.getName());
+        c.setSurname(customer.getSurname());
+        c.setEmail(customer.getEmail());
+        c.setPhoneNumber(customer.getPhoneNumber());
+        c.setGender(customer.getGender());
+        c.setDateOfBirth(customer.getDateOfBirth());
+        c.setUsername(customer.getUsername());
+        c.setBiography(customer.getBiography());
+
+        c.setWorkExperience(customer.getWorkExperience());
+        c.setEducation(customer.getEducation());
+
+        c.setSkills(customer.getSkills());
+        c.setInterests(customer.getInterests());
+        return customerRepository.save(c);
     }
 }
