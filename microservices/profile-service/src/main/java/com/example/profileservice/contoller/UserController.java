@@ -34,5 +34,12 @@ public class UserController {
 
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> findAllByInput(@RequestParam (value = "input") String input){
+     // System.out.println(input);
+
+
+      return ResponseEntity.ok().body(userService.findAllByInput(input));
+    }
 
 }
