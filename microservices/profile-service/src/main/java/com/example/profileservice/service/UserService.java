@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -48,6 +49,10 @@ public class UserService implements UserDetailsService {
     public List<User> findAllByInput(String input){
 
         return userRepository.search(input);
+    }
+
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
 }

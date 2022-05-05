@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -40,6 +41,18 @@ public class UserController {
 
 
       return ResponseEntity.ok().body(userService.findAllByInput(input));
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDTO> findByUsername(@PathVariable String username){
+    UserDTO userdto= new UserDTO();
+    User user =userService.findByUsername(username);
+    userdto.setUsername(user.getUsername());
+    userdto.setEmail(user.getEmail());
+    userdto.setName(user.getName());
+    userdto.setSurname(user.getSurname());
+    userdto.setPassword(user.getPassword());
+    return ResponseEntity.ok().body(userdto);
     }
 
 }
