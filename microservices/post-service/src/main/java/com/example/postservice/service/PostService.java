@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -25,4 +26,21 @@ public class PostService {
 
         return postRepository.findByUsername(username);
     }
+
+    public Post like(String postId){
+        Optional<Post> op = postRepository.findById(postId);
+        op.get().setLike(op.get().getLike()+1);
+        postRepository.save(op.get());
+        return  op.get();
+    }
+
+    public Post dislike(String postId){
+        Optional<Post> op = postRepository.findById(postId);
+        op.get().setDislike(op.get().getDislike()+1);
+        postRepository.save(op.get());
+        return  op.get();
+    }
+
+
+
 }

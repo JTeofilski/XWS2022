@@ -44,15 +44,16 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserDTO> findByUsername(@PathVariable String username){
-    UserDTO userdto= new UserDTO();
+    public ResponseEntity<User> findByUsername(@PathVariable String username){
+    /*UserDTO userdto= new UserDTO();
     User user =userService.findByUsername(username);
     userdto.setUsername(user.getUsername());
     userdto.setEmail(user.getEmail());
     userdto.setName(user.getName());
     userdto.setSurname(user.getSurname());
     userdto.setPassword(user.getPassword());
-    return ResponseEntity.ok().body(userdto);
+    */
+    return ResponseEntity.ok().body(userService.findByUsername(username));
     }
 
 }

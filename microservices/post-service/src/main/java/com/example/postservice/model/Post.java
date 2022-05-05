@@ -14,6 +14,8 @@ public class Post {
     private String id;
     private String text;
     private String username;
+    private Integer like=0;
+    private Integer dislike=0;
 
 
 }

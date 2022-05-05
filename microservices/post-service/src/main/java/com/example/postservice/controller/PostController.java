@@ -1,6 +1,7 @@
 package com.example.postservice.controller;
 
 import com.example.postservice.model.Post;
+import com.example.postservice.model.other.User;
 import com.example.postservice.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.ws.rs.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -35,22 +37,42 @@ public class PostController {
         }
     }
 
+    // 1.2 Pregled postova na javnim profilima
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@PathVariable String username){
         try {
-            Object object = restTemplate.getForObject("http://ms-profile/api/user/"+username, Object.class);
-            System.out.println(object);
-            return ResponseEntity.ok().body(postService.findByUsername(username));
+            User user = restTemplate.getForObject("http://ms-profile/api/user/"+username, User.class);
+            //System.out.println(user);
+            String errMsg = "Korisnicki profil je privatan";
+
+            if (user.isPublic()){
+                return ResponseEntity.ok().body(postService.findByUsername(username));
+            }else{
+                return ResponseEntity.ok().body(errMsg);
+            }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
-
     }
 
-    /* @GetMapping("/profile")
-    public List<Object> getProfiles(){
-        Object[] objects = restTemplate.getForObject("http://ms-profile/api/customer", Object[].class);
-        System.out.println(Arrays.asList(objects));
-        return Arrays.asList(objects);
-    }*/
+
+    @PutMapping("/like/{postId}")
+    public ResponseEntity<?> like(@PathVariable String postId){
+        try {
+            return  ResponseEntity.status(200).body(postService.like(postId));
+        } catch (IllegalArgumentException e) {
+        return ResponseEntity.status(400).body(e.getMessage());
+    }
+    }
+
+    @PutMapping("/dislike/{postId}")
+    public ResponseEntity<?> dislike(@PathVariable String postId){
+        try {
+            return  ResponseEntity.status(200).body(postService.dislike(postId));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+
 }
