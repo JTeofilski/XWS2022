@@ -34,7 +34,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.create(user));
 
     }
-
+    // Pretraga javnih profila
     @GetMapping("/search")
     public ResponseEntity<List<User>> findAllByInput(@RequestParam (value = "input") String input){
      // System.out.println(input);

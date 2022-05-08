@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     User findUserByEmail(String email);
 
-    @Query("SELECT u FROM User u WHERE u.username LIKE %:input% OR u.name LIKE %:input% OR u.surname LIKE %:input%")
+    @Query("SELECT u FROM User u WHERE (u.username LIKE %:input% OR u.name LIKE %:input% OR u.surname LIKE %:input%) AND u.isPublic = TRUE")
     List<User> search(String input);
 
     User findByUsername(String username);

@@ -42,7 +42,7 @@ public class PostController {
     public ResponseEntity<?> findByUsername(@PathVariable String username){
         try {
             User user = restTemplate.getForObject("http://ms-profile/api/user/"+username, User.class);
-            //System.out.println(user);
+            System.out.println(user);
             String errMsg = "Korisnicki profil je privatan";
 
             if (user.isPublic()){
