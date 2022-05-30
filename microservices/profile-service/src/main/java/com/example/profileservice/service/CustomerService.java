@@ -43,6 +43,15 @@ public class CustomerService {
         customer.setName(u.getName());
         customer.setSurname(u.getSurname());
         customer.setPassword(encoder.encode(u.getPassword()));
+        customer.setPhoneNumber(u.getPhoneNumber());
+        customer.setGender(u.getGender());
+        customer.setDateOfBirth(u.getDateOfBirth());
+        customer.setBiography(u.getBiography());
+        customer.setWorkExperience(u.getWorkExperience());
+        customer.setEducation(u.getEducation());
+        customer.setSkills(u.getSkills());
+        customer.setInterests(u.getInterests());
+        customer.setPublic(u.isPublic());
 
         Set<Role> roles = new HashSet<>();
         Role role = roleRepository.getRoleByRoleName("ROLE_CUSTOMER");

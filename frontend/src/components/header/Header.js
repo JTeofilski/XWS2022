@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import style from "./header.module.css"
 
 const Header = () => {
     return(
@@ -11,7 +12,7 @@ const Header = () => {
                     </a>
 
                     <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><Link to="/" className="nav-link px-2 text-secondary">Početna</Link></li>
+                        <li><Link to="/" className={style.fonts}>Početna stranica</Link></li>
 
                     </ul>
 

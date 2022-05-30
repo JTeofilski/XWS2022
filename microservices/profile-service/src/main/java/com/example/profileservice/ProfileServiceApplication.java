@@ -22,7 +22,8 @@ public class ProfileServiceApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedMethods("GET", "POST", "PUT", "DELETE")
-						.allowedOrigins(new String[]{"http://localhost:8081"});
+						.allowedOrigins(new String[]{"http://localhost:8081","http://localhost:3000"});
+
 			}
 		};
 	}
