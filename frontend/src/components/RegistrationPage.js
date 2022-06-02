@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const RegistrationPage = () => {
+const RegistrationPage = ({ setLoggedIn, setUsernameProp }) => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [name, setName] = useState();
@@ -15,6 +16,8 @@ const RegistrationPage = () => {
   const [skills, setSkills] = useState();
   const [interests, setInterests] = useState();
   const [isPublic, setIsPublic] = useState();
+
+  let navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -42,64 +45,104 @@ const RegistrationPage = () => {
 
     console.log(requestOptions.body);
 
-    const response = await fetch(
-      "http://localhost:8082/api/customer",
-      requestOptions
-    );
-    const data = await response.json();
-
-    console.log(data);
+    await fetch("http://localhost:8082/api/customer", requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          setLoggedIn(true);
+          navigate("/profile");
+        }
+        return response.json();
+      })
+      .then((data) => setUsernameProp(data.username));
   }
 
   return (
     <div>
-      <h1 className="d-flex justify-content-center">Registracija na sistem</h1>
+      <h2 className="d-flex justify-content-center m-3">
+        Registracija na sistem
+      </h2>
 
       <div className="d-flex justify-content-center">
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div>
-            <label>Korisničko ime:</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Korisničko ime:</label>
+            </div>
+            <div className="col-6">
+              <input
+                className="form-input"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div>
-            <label>E-mail:</label>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              {" "}
+              <label>E-mail:</label>
+            </div>
+            <div className="col-6">
+              <input
+                className="form-input"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div>
-            <label>Ime:</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Ime:</label>
+            </div>
+            <div className="col-6">
+              <input
+                className="form-input"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div>
-            <label>Prezime:</label>
-            <input
-              type="text"
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Prezime:</label>
+            </div>
+            <div className="col-6">
+              <input
+                className="form-input"
+                type="text"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div>
-            <label>Lozinka: </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Lozinka: </label>
+            </div>
+            <div className="col-6">
+              <input
+                className="form-input"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="row m-3">
+            <div className="col-6"></div>
+            <div className="col-6"></div>
+          </div>
+
+          <div className="row m-3">
+            <div className="col-6"></div>
+            <div className="col-6"></div>
           </div>
 
           <div>

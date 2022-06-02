@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./header.module.css";
 
-const Header = () => {
+const Header = ({ loggedIn, logout }) => {
+  const log = () => {
+    //logout();
+    window.localStorage.removeItem("token");
+  };
+
   return (
     <header className={`class="p-3 bg-dark text-white"`}>
       <div className={`container-fluid py-2`}>
@@ -23,15 +28,25 @@ const Header = () => {
           </ul>
 
           <div className="text-end">
-            <Link to="/update" className="btn btn-warning">
-              Izmena podataka
-            </Link>
-            <Link to="/registration" className="btn btn-outline-light me-2">
-              Registracija
-            </Link>
-            <Link to="/login" className="btn btn-warning">
-              Prijava
-            </Link>
+            {loggedIn ? (
+              <>
+                <Link to="/update" className="btn btn-warning">
+                  Izmena podataka
+                </Link>
+                <button className="btn btn-warning mx-3" onClick={log()}>
+                  Odjavi se
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/registration" className="btn btn-outline-light me-2">
+                  Registracija
+                </Link>
+                <Link to="/login" className="btn btn-warning">
+                  Prijava
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

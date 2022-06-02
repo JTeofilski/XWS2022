@@ -53,7 +53,7 @@ const UpdatePage = () => {
 
   return (
     <div>
-      <h1 className="d-flex justify-content-center">Imena podataka</h1>
+      <h1 className="d-flex justify-content-center">Izmena podataka</h1>
 
       <div className="d-flex justify-content-center">
         <form onSubmit={(e) => handleSubmit(e)}>
