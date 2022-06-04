@@ -89,6 +89,7 @@ public class CustomerService {
 
         c.setSkills(customer.getSkills());
         c.setInterests(customer.getInterests());
+        c.setPublic(customer.isPublic());
         return customerRepository.save(c);
     }
 }

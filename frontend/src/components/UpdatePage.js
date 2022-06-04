@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const UpdatePage = () => {
-  const [username, setUsername] = useState();
+const UpdatePage = ({ usernameProp }) => {
+  const [username, setUsername] = useState(usernameProp);
   const [email, setEmail] = useState();
   const [name, setName] = useState();
   const [surname, setSurname] = useState();
@@ -15,6 +15,32 @@ const UpdatePage = () => {
   const [skills, setSkills] = useState();
   const [interests, setInterests] = useState();
   const [isPublic, setIsPublic] = useState();
+
+  useEffect(() => {
+    (async function () {
+      await fetch(`http://localhost:8082/api/user/${usernameProp}`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+
+          setEmail(data.email);
+          setName(data.name);
+          setSurname(data.surname);
+          setPassword(data.password);
+          setPhone(data.phoneNumber);
+          setGender(data.gender.toLowerCase());
+          setBirthday(data.dateOfBirth);
+          setBiography(data.biography);
+          setExperience(data.workExperience);
+          setEducation(data.education);
+          setSkills(data.skills);
+          setInterests(data.interests);
+          setIsPublic(data.public);
+        });
+    })();
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -63,6 +89,7 @@ const UpdatePage = () => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              disabled
             />
           </div>
 
@@ -72,6 +99,7 @@ const UpdatePage = () => {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled
             />
           </div>
 
@@ -99,6 +127,7 @@ const UpdatePage = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled
             />
           </div>
 
@@ -118,6 +147,7 @@ const UpdatePage = () => {
             name="flexRadioDefault"
             id="flexRadioDefault1"
             value={"male"}
+            checked={gender === "male" ? true : false}
             onChange={(e) => {
               setGender(e.target.value);
               console.log(e.target.value);
@@ -134,6 +164,7 @@ const UpdatePage = () => {
             name="flexRadioDefault"
             id="flexRadioDefault2"
             value={"female"}
+            checked={gender === "female" ? true : false}
             onChange={(e) => {
               setGender(e.target.value);
               console.log(e.target.value);
@@ -204,7 +235,10 @@ const UpdatePage = () => {
             name="flexRadioDefault"
             id="flexRadioDefault2"
             checked={isPublic}
-            onChange={(e) => setIsPublic(e.target.checked)}
+            onChange={(e) => {
+              setIsPublic(e.target.checked);
+              console.log(e.target.checked);
+            }}
           />
           <label class="form-check-label" for="flexRadioDefault2">
             {" "}

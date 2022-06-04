@@ -1,11 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./header.module.css";
 
 const Header = ({ loggedIn, logout }) => {
+  let navigate = useNavigate();
+
   const log = () => {
-    //logout();
+    logout();
     window.localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -33,7 +36,7 @@ const Header = ({ loggedIn, logout }) => {
                 <Link to="/update" className="btn btn-warning">
                   Izmena podataka
                 </Link>
-                <button className="btn btn-warning mx-3" onClick={log()}>
+                <button className="btn btn-warning mx-3" onClick={() => log()}>
                   Odjavi se
                 </button>
               </>

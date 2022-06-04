@@ -136,109 +136,133 @@ const RegistrationPage = ({ setLoggedIn, setUsernameProp }) => {
           </div>
 
           <div className="row m-3">
-            <div className="col-6"></div>
-            <div className="col-6"></div>
+            <div className="col-6">
+              <label>Broj telefona:</label>
+            </div>
+            <div className="col-6">
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
           </div>
 
           <div className="row m-3">
-            <div className="col-6"></div>
-            <div className="col-6"></div>
+            <div className="col-6">
+              <label>Pol: </label>
+            </div>
+            <div className="col-6">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+                value={"male"}
+                onChange={(e) => {
+                  setGender(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                {" "}
+                M{" "}
+              </label>
+
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault2"
+                value={"female"}
+                onChange={(e) => {
+                  setGender(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+              <label class="form-check-label" for="flexRadioDefault2">
+                {" "}
+                Ž{" "}
+              </label>
+            </div>
           </div>
 
-          <div>
-            <label>Broj telefona:</label>
-            <input
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Datum rodjenja:</label>
+            </div>
+            <div className="col-6">
+              <input
+                type="text"
+                value={birthday}
+                onChange={(e) => setBirthday(e.target.value)}
+              />
+            </div>
           </div>
 
-          <label>Pol: </label>
-          <input
-            class="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            id="flexRadioDefault1"
-            value={"male"}
-            onChange={(e) => {
-              setGender(e.target.value);
-              console.log(e.target.value);
-            }}
-          />
-          <label class="form-check-label" for="flexRadioDefault1">
-            {" "}
-            M{" "}
-          </label>
-
-          <input
-            class="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            id="flexRadioDefault2"
-            value={"female"}
-            onChange={(e) => {
-              setGender(e.target.value);
-              console.log(e.target.value);
-            }}
-          />
-          <label class="form-check-label" for="flexRadioDefault2">
-            {" "}
-            Ž{" "}
-          </label>
-
-          <div>
-            <label>Datum rodjenja:</label>
-            <input
-              type="text"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Biografija:</label>
+            </div>
+            <div className="col-6">
+              <input
+                type="text"
+                value={biography}
+                onChange={(e) => setBiography(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div>
-            <label>Biografija:</label>
-            <input
-              type="text"
-              value={biography}
-              onChange={(e) => setBiography(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Radno iskustvo:</label>
+            </div>
+            <div className="col-6">
+              <input
+                type="text"
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div>
-            <label>Radno iskustvo:</label>
-            <input
-              type="text"
-              value={experience}
-              onChange={(e) => setExperience(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Obrazovanje:</label>
+            </div>
+            <div className="col-6">
+              <input
+                type="text"
+                value={education}
+                onChange={(e) => setEducation(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div>
-            <label>Obrazovanje:</label>
-            <input
-              type="text"
-              value={education}
-              onChange={(e) => setEducation(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Veštine:</label>
+            </div>
+            <div className="col-6">
+              <input
+                type="text"
+                value={skills}
+                onChange={(e) => setSkills(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div>
-            <label>Veštine:</label>
-            <input
-              type="text"
-              value={skills}
-              onChange={(e) => setSkills(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label>Interesovanja:</label>
-            <input
-              type="text"
-              value={interests}
-              onChange={(e) => setInterests(e.target.value)}
-            />
+          <div className="row m-3">
+            <div className="col-6">
+              <label>Interesovanja:</label>
+            </div>
+            <div className="col-6">
+              <input
+                type="text"
+                value={interests}
+                onChange={(e) => setInterests(e.target.value)}
+              />
+            </div>
           </div>
 
           <input

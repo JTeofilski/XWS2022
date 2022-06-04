@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = ({ setLoggedIn, setUserName }) => {
-  const [email, setEmail] = useState();
+const LoginPage = ({ setLoggedIn, setUserNameProp }) => {
+  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
   let navigate = useNavigate();
@@ -11,7 +11,7 @@ const LoginPage = ({ setLoggedIn, setUserName }) => {
     e.preventDefault();
 
     const data = new FormData();
-    data.append("username", email);
+    data.append("username", username);
     data.append("password", password);
 
     const requestOptions = {
@@ -26,13 +26,16 @@ const LoginPage = ({ setLoggedIn, setUserName }) => {
         if (response.ok) {
           //   console.log(response.json());
           setLoggedIn(true);
-          window.localStorage.setItem("token", response.json().token);
+
           navigate("/profile");
         }
         return response.json();
       })
-
-      .then((data) => setUserName(data.username))
+      .then((data) => {
+        window.localStorage.setItem("token", data.token);
+        setUserNameProp(data.username);
+        console.log("usao res");
+      })
       .catch((error) => console.error("Greska ", error));
   };
 
@@ -43,11 +46,11 @@ const LoginPage = ({ setLoggedIn, setUserName }) => {
       <div className="d-flex justify-content-center">
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
-            <label>E-mail:</label>
+            <label>Koricničko ime:</label>
             <input
               type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 

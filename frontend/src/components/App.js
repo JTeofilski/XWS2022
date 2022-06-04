@@ -6,6 +6,7 @@ import RegistrationPage from "./RegistrationPage";
 import Homepage from "./Homepage";
 import UpdatePage from "./UpdatePage";
 import ProfilePage from "./ProfilePage";
+import PublicProfile from "./PublicProfile";
 
 const App = () => {
   const getLoginState = () => {
@@ -16,18 +17,23 @@ const App = () => {
   const [username, setUserName] = useState("");
 
   const logout = () => {
+    console.log("usao u log out");
     setLoggedIn(false);
   };
   return (
     <div>
       <Router>
+        {console.log("router")}
         <Header logout={logout} loggedIn={loggedIn}></Header>
         <Routes>
           <Route
             path="/login"
             exact
             element={
-              <LoginPage setLoggedIn={setLoggedIn} setUserName={setUserName} />
+              <LoginPage
+                setLoggedIn={setLoggedIn}
+                setUserNameProp={setUserName}
+              />
             }
           />
           <Route
@@ -41,12 +47,18 @@ const App = () => {
             }
           />
           <Route path="/" exact element={<Homepage />} />
-          <Route path="/update" exact element={<UpdatePage />} />
+          <Route
+            path="/update"
+            exact
+            element={<UpdatePage usernameProp={username} />}
+          />
           <Route
             path="/profile"
             exact
             element={<ProfilePage username={username} />}
           />
+
+          <Route path="/user*" exact element={<PublicProfile />} />
         </Routes>
       </Router>
     </div>

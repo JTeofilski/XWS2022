@@ -12,6 +12,7 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
 
     User findUserByEmail(String email);
+    User findUserByUsername(String username);
 
     @Query("SELECT u FROM User u WHERE (u.username LIKE %:input% OR u.name LIKE %:input% OR u.surname LIKE %:input%) AND u.isPublic = TRUE")
     List<User> search(String input);

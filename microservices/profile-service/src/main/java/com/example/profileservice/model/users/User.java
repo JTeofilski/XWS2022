@@ -60,7 +60,7 @@ public class User {
     @Column(name = "interests")
     private String interests;
 
-
+    @Column(name = "is_public")
     private boolean isPublic = true;
 
     @ManyToMany(fetch = FetchType.EAGER)

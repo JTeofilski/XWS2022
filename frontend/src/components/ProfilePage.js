@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Post from "./Post";
 
 const ProfilePage = ({ username }) => {
   const [postText, setPostText] = useState("");
