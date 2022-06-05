@@ -33,6 +33,13 @@ const Header = ({ loggedIn, logout }) => {
           <div className="text-end">
             {loggedIn ? (
               <>
+                <Link
+                  to="/profile"
+                  className="btn btn-warning"
+                  style={{ marginRight: "10px" }}
+                >
+                  Profil
+                </Link>
                 <Link to="/update" className="btn btn-warning">
                   Izmena podataka
                 </Link>
